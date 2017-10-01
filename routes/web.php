@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('templates.template');
+});
+Route::get('/yearslist', function() {
+    return view('yearslist');
 });
