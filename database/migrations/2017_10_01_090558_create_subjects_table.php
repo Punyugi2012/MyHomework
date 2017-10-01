@@ -19,8 +19,10 @@ class CreateSubjectsTable extends Migration
             $table->string('name');
             $table->string('status');
             $table->date('subject_date');
-            $table->string('professor_name')->nullable();
-            $table->string('professor_web')->nullable();
+            $table->string('professor_name')
+                ->nullable();
+            $table->string('professor_web')
+                ->nullable();
             $table->timestamps();
         });
     }

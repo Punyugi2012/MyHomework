@@ -15,8 +15,14 @@ class CreateTermSubjectTable extends Migration
     {
         Schema::create('term_subject', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('term_id')->reference('id')->on('terms');
-            $table->foreign('subject_id')->reference('id')->on('subjects');
+            $table->unsignedInteger('term_id');
+            $table->unsignedInteger('subject_id');
+            $table->foreign('term_id')
+                ->references('id')
+                ->on('terms');
+            $table->foreign('subject_id')
+                ->references('id')
+                ->on('subjects');
             $table->timestamps();
         });
     }

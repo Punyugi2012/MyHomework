@@ -17,7 +17,10 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('link_url');
-            $table->foreign('subject_id')->reference('id')->on('subjects');
+            $table->unsignedInteger('subject_id');
+            $table->foreign('subject_id')
+                ->references('id')
+                ->on('subjects');
             $table->timestamps();
         });
     }

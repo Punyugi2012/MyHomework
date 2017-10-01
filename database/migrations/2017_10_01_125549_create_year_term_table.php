@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateYearTermsTable extends Migration
+class CreateYearTermTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,14 @@ class CreateYearTermsTable extends Migration
     {
         Schema::create('year_term', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('year_id')->reference('id')->on('years');
-            $table->foreign('term_id')->reference('id')->on('terms');
+            $table->unsignedInteger('year_id');
+            $table->unsignedInteger('term_id');
+            $table->foreign('year_id')
+                ->references('id')
+                ->on('years');
+            $table->foreign('term_id')
+                ->references('id')
+                ->on('terms');
             $table->timestamps();
         });
     }

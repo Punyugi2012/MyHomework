@@ -19,10 +19,15 @@ class CreateHomeworksTable extends Migration
             $table->date('order_date');
             $table->date('sent_date');
             $table->time('start');
-            $table->string('order_professor')->nullable();
-            $table->string('sent_professor')->nullable();
-            $table->status();
-            $table->foreign('subject_id')->reference('id')->on('subjects');
+            $table->string('order_professor')
+                ->nullable();
+            $table->string('sent_professor')
+                ->nullable();
+            $table->string('status');
+            $table->unsignedInteger('subject_id');
+            $table->foreign('subject_id')
+                ->references('id')
+                ->on('subjects');
             $table->timestamps();
         });
     }
