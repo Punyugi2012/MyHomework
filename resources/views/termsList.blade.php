@@ -25,19 +25,19 @@
             <h1>Terms</h1>
         </div>
         <div>
-            <a href="/term/1" class="btn btn-primary">
+            <a href="/yearslist/{{session()->get('year')}}/termslist/1" class="btn btn-primary">
                 <h1>1</h1>
             </a>
         </div>
         <br>
          <div>
-            <a href="/term/2" class="btn btn-primary">
+            <a href="/yearslist/{{session()->get('year')}}/termslist/2" class="btn btn-primary">
                 <h1>2</h1>
             </a>
         </div>
         <br>
          <div>
-            <a href="/term/3" class="btn btn-primary">
+            <a href="/yearslist/{{session()->get('year')}}/termslist/3" class="btn btn-primary">
                 <h1>Summer</h1>
             </a>
         </div>

@@ -15,5 +15,5 @@ Route::get('/', function () {
     return view('templates.template');
 });
 Route::get('/yearslist', 'MyHomeworkController@onYearsList');
-Route::get('/year/{year}', 'MyHomeworkController@onTermsList');
-Route::get('/term/{term}', 'SubjectController@onSubjectsList');
+Route::get('/yearslist/{year}/termslist', 'MyHomeworkController@onTermsList');
+Route::get('/yearslist/{year}/termslist/{term}', 'SubjectController@onSubjectsList');

@@ -8,7 +8,7 @@ use App\YearTerm;
 
 class SubjectController extends Controller
 {
-    public function onSubjectsList($term) {
+    public function onSubjectsList($year, $term) {
         session()->put('term', $term);
         $year = session()->get('year');
         $subjects = YearTerm::where('year_id', $year)
