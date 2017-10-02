@@ -1,3 +1,11 @@
-<nav class="navbar  navbar-dark bg-primary" style="box-shadow: 0px 5px 5px grey">
-  <span class="h1" style="color:white">{{$logo}}</span>
+<style>
+  nav {
+    box-shadow: 0px 5px 5px grey;
+  }
+  nav span {
+    color:white!important;
+  }
+</style>
+<nav class="navbar  navbar-dark bg-primary">
+  <span class="h1">{{$logo}}</span>
 </nav>

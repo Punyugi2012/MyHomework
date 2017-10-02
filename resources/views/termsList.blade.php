@@ -1,7 +1,7 @@
 @extends('templates.template')
-@section('title', 'years list')
+@section('title', 'terms list')
 @section('header')
-     @include('components.header', ['logo'=>'YEARS LIST'])
+     @include('components.header', ['logo'=>'TERMS LIST'])
 @endsection
 @section('content')
     <style>
@@ -22,29 +22,23 @@
     </style>
     <div align="center">
         <div class="card">
-            <h1>Years</h1>
+            <h1>Terms</h1>
         </div>
         <div>
-            <a href="/year/1" class="btn btn-info">
+            <a href="/term/1" class="btn btn-primary">
                 <h1>1</h1>
             </a>
         </div>
         <br>
          <div>
-            <a href="/year/2" class="btn btn-info">
+            <a href="/term/2" class="btn btn-primary">
                 <h1>2</h1>
             </a>
         </div>
         <br>
          <div>
-            <a href="/year/3" class="btn btn-info">
-                <h1>3</h1>
-            </a>
-        </div>
-        <br>
-         <div>
-            <a href="/year/4" class="btn btn-info">
-                <h1>4</h1>
+            <a href="/term/3" class="btn btn-primary">
+                <h1>Summer</h1>
             </a>
         </div>
     </div>
