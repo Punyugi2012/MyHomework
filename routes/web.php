@@ -17,3 +17,6 @@ Route::get('/', function () {
 Route::get('/yearslist', function() {
     return view('yearslist');
 });
+Route::get('/yearslist/year/{year}/termslist', function($year) {
+    return $year;
+});
