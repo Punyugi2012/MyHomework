@@ -22,7 +22,8 @@ class CreateYeartermSubjectTable extends Migration
             ->on('year_term');
             $table->foreign('subject_id')
             ->references('id')
-            ->on('subjects');
+            ->on('subjects')
+            ->onDelete('cascade');
         });
     }
 

@@ -11,6 +11,6 @@ class MyHomeworkController extends Controller
     }
     public function onTermsList($year) {
         session()->put('year', $year);
-        return view('termsList');
+        return view('termsList', ['year'=>$year]);
     }
 }

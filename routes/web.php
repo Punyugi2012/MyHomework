@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('templates.template');
 });
-Route::get('/yearslist', 'MyHomeworkController@onYearsList');
-Route::get('/yearslist/{year}/termslist', 'MyHomeworkController@onTermsList');
-Route::get('/yearslist/{year}/termslist/{term}', 'SubjectController@onSubjectsList');
+Route::get('/years', 'MyHomeworkController@onYearsList');
+Route::get('/year/{year}/terms', 'MyHomeworkController@onTermsList');
+Route::get('/year/{year}/term/{term}/subjects', 'SubjectController@onSubjectsList');
+Route::post('/add-subject', 'SubjectController@addSubject');
+Route::delete('/delete-subject/{id}', 'SubjectController@deleteSubject');
