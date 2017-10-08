@@ -39,7 +39,7 @@ class SubjectController extends Controller
             'status'=>$status,
             'subject_date'=>$request['subjectDate'],
             'professor_name'=>$request['professorName']??'',
-            'professor_web'=>$request['professorWeb']??'#',
+            'professor_web'=>$request['professorWeb']??'',
         ]);
         $year = session()->get('year');
         $term = session()->get('term');
@@ -52,6 +52,19 @@ class SubjectController extends Controller
     public function deleteSubject($id) {
         $subject = Subject::find($id);
         $subject->delete();
+        return back();
+    }
+    public function editSubject(Request $request, $id) {
+        $status = $request['edit-subjectStatus'];
+        $status = $this->convertStatus($status);
+        Subject::find($id)->update([
+            'subject_code'=>$request['edit-subjectCode'],
+            'name'=>$request['edit-subjectName'],
+            'status'=>$status,
+            'subject_date'=>$request['edit-subjectDate'],
+            'professor_name'=>$request['edit-professorName']??'',
+            'professor_web'=>$request['edit-professorWeb']??'',
+        ]);
         return back();
     }
 }

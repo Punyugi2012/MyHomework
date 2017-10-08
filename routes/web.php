@@ -19,3 +19,4 @@ Route::get('/year/{year}/terms', 'MyHomeworkController@onTermsList');
 Route::get('/year/{year}/term/{term}/subjects', 'SubjectController@onSubjectsList');
 Route::post('/add-subject', 'SubjectController@addSubject');
 Route::delete('/delete-subject/{id}', 'SubjectController@deleteSubject');
+Route::put('/edit-subject/{id}', 'SubjectController@editSubject');

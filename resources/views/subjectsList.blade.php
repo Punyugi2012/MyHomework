@@ -72,11 +72,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                 <form action="/add-subject" method="post">
-                    {{csrf_field()}}
+                 <form action="/add-subject" method="post"  autocomplete="off">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="subjectCode">Subject Code:</label>
+                            {{csrf_field()}}
                             <input type="text" class="form-control" placeholder="subject code" id="subjectCode" name="subjectCode" required>
                         </div>
                         <div class="form-group">
@@ -122,10 +122,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                 <form> 
+                 <form method="post" autocomplete="off"> 
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="edit-subjectCode">Subject Code:</label>
+                             {{csrf_field()}}
+                             {{method_field('PUT')}}
                             <input type="text" class="form-control" placeholder="subject code" id="edit-subjectCode" name="edit-subjectCode" required>
                         </div>
                         <div class="form-group">
@@ -170,14 +172,28 @@
                     .val('')
                     .end()
             });
+            function convertStatus(status) {
+                if(status == 'studying') {
+                    return '1';
+                }
+                if(status == 'passed') {
+                    return '2';
+                }
+                else if(status == 'notpass'){
+                    return '3';
+                }
+                return '';
+            }
             $('button.btn-warning').on('click', function() {
-                console.log($(this).data('id'));
-                console.log($(this).data('subject-code'));
-                console.log($(this).data('subject-name'));
-                console.log($(this).data('status'));
-                console.log($(this).data('subject-date'));
-                console.log($(this).data('professor-name'));
-                console.log($(this).data('professor-web'));
+                $('#editSubjectModal form').attr('action', '/edit-subject/' +  $(this).data('id'));
+                $('#edit-subjectCode').val($(this).data('subject-code'));
+                $('#edit-subjectName').val($(this).data('subject-name'));
+                var status = $(this).data('status');
+                status = convertStatus(status);
+                $('#edit-subjectStatus').val(status);
+                $('#edit-subjectDate').val($(this).data('subject-date'));
+                $('#edit-professorName').val($(this).data('professor-name'));
+                $('#edit-professorWeb').val($(this).data('professor-web'));
             });
         });
     </script>
