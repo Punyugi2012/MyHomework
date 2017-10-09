@@ -14,7 +14,6 @@ class SubjectController extends Controller
 {
     public function onSubjectsList($year, $term) {
         session()->put('term', $term);
-        $year = session()->get('year');
         $subjects = YearTerm::where('year_id', $year)
             ->where('term_id', $term)
             ->first()

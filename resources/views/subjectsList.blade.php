@@ -45,7 +45,7 @@
                     <h1 class="card-title">{{$subject->name}}</h1>
                     <p class="card-text">{{$subject->professor_name}}</p>
                     <a href="#" class="btn btn-primary">Go Homeworks</a>
-                    <button class="btn btn-info">Detail</button>                    
+                    <button class="btn btn-info" data-toggle="modal" data-target="#subjectDetail" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-subject-date="{{$subject->subject_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Detail</button>                    
                     <div class="group-form">
                         <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-subject-date="{{$subject->subject_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
                         <form action="\delete-subject\{{$subject->id}}" method="post">
@@ -93,7 +93,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="subjectDate">Subject Date:</label>
+                            <label for="subjectDate">Study Begin:</label>
                             <input type="date" class="form-control" id="subjectDate" name="subjectDate" required>
                         </div>
                         <div class="form-group">
@@ -144,7 +144,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="edit-subjectDate">Subject Date:</label>
+                            <label for="edit-subjectDate">Study Begin:</label>
                             <input type="date" class="form-control" id="edit-subjectDate" name="edit-subjectDate" required>
                         </div>
                         <div class="form-group">
@@ -162,6 +162,43 @@
                     </div>
                  </form>
              </div>
+        </div>
+    </div>
+     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="subjectDetail">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Subject Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <b>Subject Code:</b><span id="subject-code"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Subject Name:</b><span id="subject-name"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Subject Status:</b><span id="subject-status"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Study Begin:</b><span id="subject-begin"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Professor Name:</b><span id="professor-name"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Professor Web:</b><span id="professor-web"></span>
+                        </li>
+                    </ul>                 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -194,6 +231,14 @@
                 $('#edit-subjectDate').val($(this).data('subject-date'));
                 $('#edit-professorName').val($(this).data('professor-name'));
                 $('#edit-professorWeb').val($(this).data('professor-web'));
+            });
+            $('button.btn-info').on('click', function() {
+                $('#subject-code').html($(this).data('subject-code'));
+                $('#subject-name').html($(this).data('subject-name'));
+                $('#subject-status').html($(this).data('status'));
+                $('#subject-begin').html($(this).data('subject-date'));
+                $('#professor-name').html($(this).data('professor-name'));
+                $('#professor-web').html($(this).data('professor-web'));
             });
         });
     </script>
