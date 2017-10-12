@@ -44,10 +44,10 @@
                 <div class="card-body">
                     <h1 class="card-title">{{$subject->name}}</h1>
                     <p class="card-text">{{$subject->professor_name}}</p>
-                    <a href="#" class="btn btn-primary">Go Homeworks</a>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#subjectDetail" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-subject-date="{{$subject->subject_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Detail</button>                    
+                    <a href="/year/{{$year}}/term/{{$term}}/subject/{{$subject->id}}/homeworks" class="btn btn-primary">Go Homeworks</a>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#subjectDetail" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Detail</button>                    
                     <div class="group-form">
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-subject-date="{{$subject->subject_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
                         <form action="\delete-subject\{{$subject->id}}" method="post">
                             {{csrf_field()}}
                             {{ method_field('DELETE') }}
@@ -93,8 +93,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="subjectDate">Study Begin:</label>
-                            <input type="date" class="form-control" id="subjectDate" name="subjectDate" required>
+                            <label for="beginDate">Study Begin:</label>
+                            <input type="date" class="form-control" id="beginDate" name="beginDate" required>
                         </div>
                         <div class="form-group">
                             <label for="professorName">Professor Name:</label>
@@ -144,8 +144,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="edit-subjectDate">Study Begin:</label>
-                            <input type="date" class="form-control" id="edit-subjectDate" name="edit-subjectDate" required>
+                            <label for="edit-beginDate">Study Begin:</label>
+                            <input type="date" class="form-control" id="edit-beginDate" name="edit-beginDate" required>
                         </div>
                         <div class="form-group">
                             <label for="edit-professorName">Professor Name:</label>
@@ -185,13 +185,13 @@
                             <b>Subject Status:</b><span id="subject-status"></span>
                         </li>
                         <li class="list-group-item">
-                            <b>Study Begin:</b><span id="subject-begin"></span>
+                            <b>Study Begin:</b><span id="subject-beginDate"></span>
                         </li>
                         <li class="list-group-item">
                             <b>Professor Name:</b><span id="professor-name"></span>
                         </li>
                         <li class="list-group-item">
-                            <b>Professor Web:</b><span id="professor-web"></span>
+                            <b>Professor Web:</b><a id="professor-web" target="_blank"></a>
                         </li>
                     </ul>                 
                 </div>
@@ -228,7 +228,7 @@
                 var status = $(this).data('status');
                 status = convertStatus(status);
                 $('#edit-subjectStatus').val(status);
-                $('#edit-subjectDate').val($(this).data('subject-date'));
+                $('#edit-beginDate').val($(this).data('begin-date'));
                 $('#edit-professorName').val($(this).data('professor-name'));
                 $('#edit-professorWeb').val($(this).data('professor-web'));
             });
@@ -236,9 +236,16 @@
                 $('#subject-code').html($(this).data('subject-code'));
                 $('#subject-name').html($(this).data('subject-name'));
                 $('#subject-status').html($(this).data('status'));
-                $('#subject-begin').html($(this).data('subject-date'));
+                $('#subject-beginDate').html($(this).data('begin-date'));
                 $('#professor-name').html($(this).data('professor-name'));
+                $('#professor-web').attr('href', $(this).data('professor-web'));
                 $('#professor-web').html($(this).data('professor-web'));
+            });
+            $('button.btn-danger').on('click', function() {
+               var result = confirm('Are you sure?');
+               if(!result) {
+                   return false;
+               }
             });
         });
     </script>

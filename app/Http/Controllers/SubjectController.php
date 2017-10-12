@@ -18,7 +18,7 @@ class SubjectController extends Controller
             ->where('term_id', $term)
             ->first()
             ->subjects??[];
-        return view('subjectsList', compact('subjects'));
+        return view('subjectList', compact('subjects', 'year', 'term'));
     }
     private function convertStatus($id) {
         if($id == 1) {
@@ -36,7 +36,7 @@ class SubjectController extends Controller
             'subject_code'=>$request['subjectCode'],
             'name'=>$request['subjectName'],
             'status'=>$status,
-            'subject_date'=>$request['subjectDate'],
+            'begin_date'=>$request['beginDate'],
             'professor_name'=>$request['professorName']??'',
             'professor_web'=>$request['professorWeb']??'',
         ]);
@@ -60,7 +60,7 @@ class SubjectController extends Controller
             'subject_code'=>$request['edit-subjectCode'],
             'name'=>$request['edit-subjectName'],
             'status'=>$status,
-            'subject_date'=>$request['edit-subjectDate'],
+            'begin_date'=>$request['edit-beginDate'],
             'professor_name'=>$request['edit-professorName']??'',
             'professor_web'=>$request['edit-professorWeb']??'',
         ]);

@@ -18,7 +18,6 @@ class CreateHomeworksTable extends Migration
             $table->string('name');
             $table->date('order_date');
             $table->date('sent_date');
-            $table->time('start');
             $table->string('order_professor')
                 ->nullable();
             $table->string('sent_professor')
@@ -27,7 +26,8 @@ class CreateHomeworksTable extends Migration
             $table->unsignedInteger('subject_id');
             $table->foreign('subject_id')
                 ->references('id')
-                ->on('subjects');
+                ->on('subjects')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
