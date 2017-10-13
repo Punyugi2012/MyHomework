@@ -16,6 +16,8 @@
       }
       div.card {
           width:200px;
+          margin-bottom:20px;
+          margin-top:10px;
       }
       div.alert {
           margin-top:80px;
@@ -28,11 +30,22 @@
           display:inline;
       }
     </style>
+    <div style="position: absolute">
+        <div>
+            <h1>Year: {{$year}}</h1>
+        </div>
+        <div>
+            @if($term == "3")
+                <h1>Term: Summer</h1>
+            @else
+                <h1>Term: {{$term}}</h1>
+            @endif
+        </div>
+    </div>
     <div align="center" style="margin-top:50px;margin-bottom:30px">
         <div class="card">
             <h1>Subjects</h1>
         </div>
-        <br>
         <button class="btn btn-success add-subject" data-toggle="modal" data-target="#addSubjectModal">+ Add Subject</button>
         @if(count($subjects) == 0)
             <div class="alert alert-danger">

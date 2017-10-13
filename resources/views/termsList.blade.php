@@ -5,14 +5,9 @@
 @endsection
 @section('content')
     <style>
-        body:nth-child(1) {
-            margin-top:50px;
-        }
-        div:nth-child(1) {
+        div.card {
             width:200px;
-        }
-        div:nth-child(2) {
-            margin-top:50px;
+            margin-bottom:20px;
         }
         a {
             width:200px;
@@ -20,7 +15,10 @@
             padding-top:20px!important;
         }
     </style>
-    <div align="center">
+    <div style="position: absolute">
+        <h1>Year: {{$year}}</h1>
+    </div>
+    <div align="center" style="margin-top:50px">
         <div class="card">
             <h1>Terms</h1>
         </div>

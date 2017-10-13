@@ -32,6 +32,21 @@
             border:3px solid #C0392B;
         }
     </style>
+    <div style="position: absolute">
+        <div>
+            <h1>Year:{{$year}}</h1>
+        </div>
+        <div>
+            @if($term == "3")
+                <h1>Term: Summer</h1>
+            @else
+                <h1>Term: {{$term}}</h1>
+            @endif
+        </div>
+        <div>
+            <h1>Subject: {{$subjectName}}</h1>
+        </div>
+    </div>
     <div align="center" style="margin-top:50px;margin-bottom:30px">
         <div class="card">
             <h1>Homeworks</h1>
@@ -60,9 +75,9 @@
                     </div>
                     <div class="card-footer text-muted">
                         <span>Order: {{$homework->order_date}}</span>
-                        Sent: <span class="sent" id="{{$loop->index + 1}}">{{$homework->sent_date}}</span>
+                        Sent: <span class="{{$homework->status == 'finished'? '' : 'sent'}}" id="{{$loop->index + 1}}">{{$homework->sent_date}}</span>
                         <br>
-                        Remaining time : <span id="{{'printDate'.($loop->index + 1)}}"></span>
+                        <span id="{{'printSentDate'.($loop->index + 1)}}"></span> left
                     </div>
                 </div>
             @endforeach
@@ -87,10 +102,10 @@
                     }
                 }, 1000);
             }
-           /*$('.sent').map(function() {
+           $('.sent').map(function() {
                 var splited = $(this).text().split("-");
-                countdown("printDate" + $(this).attr('id'), parseInt(splited[1]), parseInt(splited[2]), parseInt(splited[0]));
-            });*/
+                countdown("printSentDate" + $(this).attr('id'), parseInt(splited[1]), parseInt(splited[2]), parseInt(splited[0]));
+            });
         });
     </script>
 @endsection
@@ -104,7 +119,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                 <form action="/add-homework" method="post"  autocomplete="off">
+                 <form action="/add-homework/{{$id}}" method="post"  autocomplete="off">
                     <div class="modal-body">
                         <div class="form-group">
                             {{csrf_field()}}
@@ -125,8 +140,8 @@
                                 <option value=""></option>
                                 <option value="0">None</option>
                                 <option value="1">Doing</option>
-                                <option value="2">finished</option>
-                                <option value="3">notfinish</option>
+                                <option value="2">Finished</option>
+                                <option value="3">Notfinish</option>
                             </select>
                         </div>
                     </div>

@@ -18,10 +18,6 @@ class CreateHomeworksTable extends Migration
             $table->string('name');
             $table->date('order_date');
             $table->date('sent_date');
-            $table->string('order_professor')
-                ->nullable();
-            $table->string('sent_professor')
-                ->nullable();
             $table->string('status');
             $table->unsignedInteger('subject_id');
             $table->foreign('subject_id')
