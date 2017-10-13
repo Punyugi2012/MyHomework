@@ -12,4 +12,7 @@ class HomeworkController extends Controller
         $homeworks = Subject::find($id)->homeworks;
         return view('homeworkList', compact('homeworks'));
     }
+    public function addHomework(Request $request) {
+        return "hi";
+    }
 }

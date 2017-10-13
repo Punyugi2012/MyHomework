@@ -37,10 +37,10 @@
             <h1>Homeworks</h1>
         </div>
         <br>
-        <button class="btn btn-success">+ Add Homework</button>
+        <button class="btn btn-success" data-toggle="modal" data-target="#addHomeworkModal">+ Add Homework</button>
         @if(count($homeworks) == 0)
             <div class="alert alert-danger">
-                <h1>No Subjects.</h1>
+                <h1>No Homework.</h1>
             </div>
         @endif
             @foreach($homeworks as $homework)
@@ -93,4 +93,49 @@
             });*/
         });
     </script>
+@endsection
+@section('footer')
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="addHomeworkModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title">+Add Homework</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                 <form action="/add-homework" method="post"  autocomplete="off">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            {{csrf_field()}}
+                            <label for="nameHomework">Name:</label>
+                            <input type="text" class="form-control" name="nameHomework" id="nameHomework">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderDate">Order Date:</label>
+                            <input type="date" class="form-control" name="orderDate" id="orderDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="sentDate">Sent Date:</label>
+                            <input type="date" class="form-control" name="sentDate" id="sentDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select class="form-control" name="status" id="status">
+                                <option value=""></option>
+                                <option value="0">None</option>
+                                <option value="1">Doing</option>
+                                <option value="2">finished</option>
+                                <option value="3">notfinish</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+             </div>
+        </div>
+    </div>
 @endsection
