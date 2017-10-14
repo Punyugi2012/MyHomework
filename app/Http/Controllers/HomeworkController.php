@@ -38,4 +38,18 @@ class HomeworkController extends Controller
         ]);
         return back();
     }
+    public function editHomework(Request $request, $id) {
+        $status = $this->convertStatus($request['editStatus']);
+        Homework::find($id)->update([
+            'name'=>$request['editNameHomework'],
+            'order_date'=>$request['editOrderDate'],
+            'sent_date'=>$request['editSentDate'],
+            'status'=>$status
+        ]);
+        return back();
+    }
+    public function deleteHomework($id) {
+        Homework::find($id)->delete();
+        return back();
+    }
 }

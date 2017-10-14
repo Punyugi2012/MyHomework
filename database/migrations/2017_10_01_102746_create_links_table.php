@@ -17,10 +17,11 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('link_url');
-            $table->unsignedInteger('subject_id');
-            $table->foreign('subject_id')
+            $table->unsignedInteger('homework_id');
+            $table->foreign('homework_id')
                 ->references('id')
-                ->on('subjects');
+                ->on('homeworks')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

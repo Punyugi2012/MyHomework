@@ -8,7 +8,7 @@ class Subject extends Model
 {
     protected $fillable = ['subject_code', 'name', 'status', 'begin_date', 'professor_name', 'professor_web'];
 
-    public function Homeworks() {
+    public function homeworks() {
         return $this->hasMany('App\Homework');
     }
 }

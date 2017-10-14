@@ -20,11 +20,11 @@ class SubjectController extends Controller
             ->subjects??[];
         return view('subjectList', compact('subjects', 'year', 'term'));
     }
-    private function convertStatus($id) {
-        if($id == 1) {
+    private function convertStatus($status) {
+        if($status == 1) {
             return 'studying';
         }
-        elseif($id == 2) {
+        elseif($status == 2) {
             return  'passed';
         }
         return 'notpass';
