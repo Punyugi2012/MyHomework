@@ -29,18 +29,17 @@
       form, .add-subject {
           display:inline;
       }
+      h1 {
+          display:inline;
+      }
     </style>
-    <div style="position: absolute">
-        <div>
-            <h1>Year: {{$year}}</h1>
-        </div>
-        <div>
-            @if($term == "3")
-                <h1>Term: Summer</h1>
-            @else
-                <h1>Term: {{$term}}</h1>
-            @endif
-        </div>
+    <div style="margin-top:20px;">
+        <h1 style="color:#0000FF">Year:{{$year}}</h1> <h1>--></h1>
+        @if($term == "3")
+            <h1 style="color:#800080">Term: Summer</h1> <h1>--></h1>
+        @else
+            <h1 style="color:#800080">Term: {{$term}}</h1> 
+        @endif
     </div>
     <div align="center" style="margin-top:50px;margin-bottom:30px">
         <div class="card">
@@ -55,7 +54,7 @@
         @foreach($subjects as $subject)
             <div class="card text-center {{$subject->status == 'studying' ? 'studying' : ($subject->status == 'passed' ? 'passed' : ($subject->status == 'notpass' ? 'notpass' : ''))}}" style="width:50%;margin-top:20px">
                 <div class="card-body">
-                    <h1 class="card-title">{{$subject->name}}</h1>
+                    <h2 class="card-title">{{$subject->name}}</h2>
                     <p class="card-text">{{$subject->professor_name}}</p>
                     <a href="/year/{{$year}}/term/{{$term}}/subject/{{$subject->id}}/homeworks" class="btn btn-primary">Go Homeworks</a>
                     <button class="btn btn-info" data-toggle="modal" data-target="#subjectDetail" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Detail</button>                    

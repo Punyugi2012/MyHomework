@@ -15,8 +15,8 @@
             padding-top:20px!important;
         }
     </style>
-    <div style="position: absolute">
-        <h1>Year: {{$year}}</h1>
+    <div style="margin-top:20px">
+        <h1 style="display:inline;color:#0000FF">Year:{{$year}}</h1>
     </div>
     <div align="center" style="margin-top:50px">
         <div class="card">

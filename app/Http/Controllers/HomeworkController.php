@@ -11,6 +11,7 @@ use App\Homework;
 class HomeworkController extends Controller
 {
     public function onHomeworkList($year, $term, $id) {
+        session()->put('subject', $id);
         $homeworks = Subject::find($id)->homeworks;
         $subjectName = Subject::find($id)->name;
         return view('homeworkList', compact('homeworks', 'subjectName', 'year', 'term', 'id'));

@@ -31,21 +31,18 @@
         .not-finish {
             border:3px solid #C0392B;
         }
+        h1 {
+            display:inline;
+        }
     </style>
-    <div style="position: absolute">
-        <div>
-            <h1>Year:{{$year}}</h1>
-        </div>
-        <div>
-            @if($term == "3")
-                <h1>Term: Summer</h1>
-            @else
-                <h1>Term: {{$term}}</h1>
-            @endif
-        </div>
-        <div>
-            <h1>Subject: {{$subjectName}}</h1>
-        </div>
+    <div style="margin-top:20px">
+        <h1 style="color:#0000FF">Year:{{$year}}</h1> <h1>--></h1>
+        @if($term == "3")
+            <h1 style="color:#800080">Term: Summer</h1> <h1>--></h1>
+        @else
+            <h1 style="color:#800080">Term: {{$term}}</h1> <h1>--></h1>
+        @endif
+        <h1 style="color:#FF7373">Subject: {{$subjectName}}</h1>
     </div>
     <div align="center" style="margin-top:50px;margin-bottom:30px">
         <div class="card">
@@ -61,7 +58,7 @@
             @foreach($homeworks as $homework)
                 <div class="card text-center {{$homework->status == 'doing' ? 'doing' : ($homework->status == 'finished' ? 'finished' : ($homework->status == 'notfinish' ? 'not-finish' : ''))}}">
                     <div class="card-body">
-                        <h1 class="card-title">{{$homework->name}}</h1>
+                        <h2 class="card-title">{{$homework->name}}</h2>
                         <div class="group-form">
                             <form action="/homework/{{$homework->id}}/links" method="get">
                                 <button type="submit" class="btn btn-info">Links</button>
@@ -200,6 +197,12 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#addHomeworkModal').on('hidden.bs.modal', function (e) {
+                $(this)
+                    .find("input")
+                    .val('')
+                    .end()
+            });
             function convertStatus(status) {
                 if(status == "none") {
                     return "0";

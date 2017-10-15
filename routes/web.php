@@ -24,4 +24,7 @@ Route::get('/year/{year}/term/{term}/subject/{id}/homeworks', 'HomeworkControlle
 Route::post('/add-homework/{subjectId}', 'HomeworkController@addHomework');
 Route::put('/edit-homework/{id}', 'HomeworkController@editHomework');
 Route::delete('/delete-homework/{id}', 'HomeworkController@deleteHomework');
-Route::get('homework/{homeworkId}/links', 'LinkController@onLinkList');
+Route::get('/homework/{homeworkId}/links', 'LinkController@onLinkList');
+Route::get('/add-link', 'LinkController@addLink');
+Route::delete('/delete-link/{id}', 'LinkController@deleteLink');
+Route::put('/edit-link/{id}', 'LinkController@editLink');
