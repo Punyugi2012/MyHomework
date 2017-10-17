@@ -10,14 +10,24 @@
         }
     </style>
     <div style="margin-top:20px">
-        <h1 style="color:#0000FF">Year:{{$year}}</h1> <h1>--></h1>
+               <h1 style="color:#0000FF">
+            <a href="/year">Year</a>:{{$year}}
+        </h1> <h1>--></h1>
         @if($term == "3")
-            <h1 style="color:#800080">Term: Summer</h1> <h1>--></h1>
+            <h1 style="color:#800080">
+                <a href="/year/{{$year}}/term">Term</a>: Summer
+            </h1> <h1>--></h1>
         @else
-            <h1 style="color:#800080">Term: {{$term}}</h1> <h1>--></h1>
+            <h1 style="color:#800080">
+                <a href="/year/{{$year}}/term">Term</a>: {{$term}}
+            </h1> <h1>--></h1>
         @endif
-        <h1 style="color:#FF7373">Subject: {{$subjectName}}</h1> <h1>--></h1>
-        <h1 style="color:#008080">Homework: {{$homeworkName}}</h1>
+        <h1 style="color:#FF7373">
+            <a href="/term/{{$term}}/subject">Subject</a>: {{$subjectName}}
+        </h1> <h1>--></h1>
+        <h1 style="color:#008080">
+            <a href="/subject/{{$subject}}/homework">Homework</a>: {{$homeworkName}}
+        </h1>
     </div>
     <div class="row" style="margin-top:50px;margin-bottom:30px">
         <div class="col-md-6">

@@ -9,12 +9,14 @@ use App\Link;
 class LinkController extends Controller
 {
     public function onLinkList($homeworkId) {
+        session()->put('homework', $homeworkId);
         $year = session()->get('year');
         $term = session()->get('term');
-        $subjectName = Subject::find(session()->get('subject'))->name;
+        $subject = session()->get('subject');
+        $subjectName = Subject::find($subject)->name;
         $links = Homework::find($homeworkId)->links;
         $homeworkName = Homework::find($homeworkId)->name;
-        return view('linkList', compact('year', 'term', 'subjectName', 'homeworkName', 'links'));
+        return view('linkList', compact('year', 'term', 'subject', 'subjectName', 'homeworkName', 'links'));
     }
     public function addLink(Request $request) {
         $homeworkId = session()->get('homework');
