@@ -56,7 +56,7 @@
                 <div class="card-body">
                     <h2 class="card-title">{{$subject->name}}</h2>
                     <p class="card-text">{{$subject->professor_name}}</p>
-                    <a href="/year/{{$year}}/term/{{$term}}/subject/{{$subject->id}}/homeworks" class="btn btn-primary">Go Homeworks</a>
+                    <a href="/subject/{{$subject->id}}/homework" class="btn btn-primary">Go Homeworks</a>
                     <button class="btn btn-info" data-toggle="modal" data-target="#subjectDetail" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Detail</button>                    
                     <div class="group-form">
                         <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
@@ -84,7 +84,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                 <form action="/add-subject" method="post"  autocomplete="off">
+                 <form action="/add-subject" method="get"  autocomplete="off">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="subjectCode">Subject Code:</label>

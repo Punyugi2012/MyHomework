@@ -23,19 +23,19 @@
             <h1>Terms</h1>
         </div>
         <div>
-            <a href="/year/{{$year}}/term/1/subjects" class="btn btn-primary">
+            <a href="/term/1/subject" class="btn btn-primary">
                 <h1>1</h1>
             </a>
         </div>
         <br>
          <div>
-            <a href="/year/{{$year}}/term/2/subjects" class="btn btn-primary">
+            <a href="/term/2/subject" class="btn btn-primary">
                 <h1>2</h1>
             </a>
         </div>
         <br>
          <div>
-            <a href="/year/{{$year}}/term/3/subjects" class="btn btn-primary">
+            <a href="/term/3/subject" class="btn btn-primary">
                 <h1>Summer</h1>
             </a>
         </div>

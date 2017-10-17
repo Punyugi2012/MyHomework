@@ -10,11 +10,13 @@ use App\Homework;
 
 class HomeworkController extends Controller
 {
-    public function onHomeworkList($year, $term, $id) {
-        session()->put('subject', $id);
-        $homeworks = Subject::find($id)->homeworks;
-        $subjectName = Subject::find($id)->name;
-        return view('homeworkList', compact('homeworks', 'subjectName', 'year', 'term', 'id'));
+    public function onHomeworkList($subject) {
+        session()->put('subject', $subject);
+        $year = session()->get('year');
+        $term = session()->get('term');
+        $homeworks = Subject::find($subject)->homeworks;
+        $subjectName = Subject::find($subject)->name;
+        return view('homeworkList', compact('homeworks', 'subjectName', 'year', 'term'));
     }
     private function convertStatus($status) {
         if($status == 0) {
@@ -28,14 +30,14 @@ class HomeworkController extends Controller
         }
         return "notfinish";
     }
-    public function addHomework(Request $request, $subjectId) {
+    public function addHomework(Request $request) {
         $status = $this->convertStatus($request['status']);
         Homework::create([
             'name'=>$request['nameHomework'],
             'order_date'=>$request['orderDate'],
             'sent_date'=>$request['sentDate'],
             'status'=>$status,
-            'subject_id'=>$subjectId
+            'subject_id'=> session()->get('subject')
         ]);
         return back();
     }

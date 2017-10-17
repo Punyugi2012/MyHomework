@@ -117,7 +117,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                 <form action="/add-homework/{{$id}}"method="post"  autocomplete="off">
+                 <form action="/add-homework" method="get"  autocomplete="off">
                     <div class="modal-body">
                         <div class="form-group">
                             {{csrf_field()}}
