@@ -16,7 +16,9 @@
         }
     </style>
     <div style="margin-top:20px">
-        <h1 style="display:inline;color:#0000FF">Year:{{$year}}</h1>
+        <h1 style="display:inline;color:#0000FF">
+            <a href="/year">Year</a>:{{$year}}
+        </h1>
     </div>
     <div align="center" style="margin-top:50px">
         <div class="card">
