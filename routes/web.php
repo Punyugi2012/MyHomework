@@ -14,14 +14,14 @@
 Route::get('/', function () {
     return view('templates.template');
 });
-Route::get('/years', 'MyHomeworkController@onYearsList');
-Route::get('/year/{year}/terms', 'MyHomeworkController@onTermsList');
-Route::get('/year/{year}/term/{term}/subjects', 'SubjectController@onSubjectsList');
-Route::post('/add-subject', 'SubjectController@addSubject');
+Route::get('/year', 'MyHomeworkController@onYearsList');
+Route::get('/year/{year}/term', 'MyHomeworkController@onTermsList');
+Route::get('/term/{term}/subject', 'SubjectController@onSubjectsList');
+Route::get('/add-subject', 'SubjectController@addSubject');
 Route::delete('/delete-subject/{id}', 'SubjectController@deleteSubject');
 Route::put('/edit-subject/{id}', 'SubjectController@editSubject');
-Route::get('/year/{year}/term/{term}/subject/{id}/homeworks', 'HomeworkController@onHomeworkList');
-Route::post('/add-homework/{subjectId}', 'HomeworkController@addHomework');
+Route::get('/subject/{subject}/homework', 'HomeworkController@onHomeworkList');
+Route::get('/add-homework', 'HomeworkController@addHomework');
 Route::put('/edit-homework/{id}', 'HomeworkController@editHomework');
 Route::delete('/delete-homework/{id}', 'HomeworkController@deleteHomework');
 Route::get('/homework/{homeworkId}/links', 'LinkController@onLinkList');

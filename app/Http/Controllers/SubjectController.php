@@ -12,8 +12,9 @@ use App\YearTermSubject;
 
 class SubjectController extends Controller
 {
-    public function onSubjectsList($year, $term) {
+    public function onSubjectsList($term) {
         session()->put('term', $term);
+        $year = session()->get('year');
         $subjects = YearTerm::where('year_id', $year)
             ->where('term_id', $term)
             ->first()
