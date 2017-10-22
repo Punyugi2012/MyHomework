@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('templates.template');
-});
+
+Route::get('/', 'MyHomeworkController@onHome');
 Route::get('/year', 'MyHomeworkController@onYearsList');
 Route::get('/year/{year}/term', 'MyHomeworkController@onTermsList');
 Route::get('/term/{term}/subject', 'SubjectController@onSubjectsList');
