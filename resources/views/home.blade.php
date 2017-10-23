@@ -1,4 +1,4 @@
-@extends('templates.template')
+{{--  @extends('templates.template')
 @section('title', 'home')
 @section('content')
 <div class="card">
@@ -33,4 +33,15 @@
     <a href="/year" class="btn btn-primary">START</a>
   </div>
 </div>
+@endsection  --}}
+@extends('templates.template')
+@section('title', 'Home')
+@section('header')
+    @include('components.header')
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+    </nav>
 @endsection
+

@@ -1,11 +1,3 @@
-<style>
-  nav {
-    box-shadow: 0px 5px 5px grey;
-  }
-  nav span {
-    color:white!important;
-  }
-</style>
-<nav class="navbar  navbar-dark bg-primary">
-  <span class="h1">{{$logo}}</span>
+<nav class="navbar navbar-dark bg-dark" style="height:100px">
+  <a class="navbar-brand" href="/"><h1>My Homework</h1></a>
 </nav>
