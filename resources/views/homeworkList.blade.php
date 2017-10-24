@@ -1,81 +1,42 @@
 @extends('templates.template')
 @section('title', 'homework list')
 @section('header')
-    @include('components.header', ['logo'=>'HOMEWORK LIST'])
+    @include('components.header')
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/year">Year</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/year/{{session()->get('year')}}/term">Term</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/term/{{session()->get('term')}}/subject">Subject</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Homework</li>
+        </ol>
+    </nav>
 @endsection
 @section('content')
     <style>
-        div.card {
-            width:250px;
-        }
-        div.alert {
-          margin-top:80px;
-        }
-        div.group-form {
-          display:inline;
-          float:right;
-        }
         form {
             display:inline;
         }
-        div.text-center {
-            width:50%;
-            margin-top:20px;
-        }
-        .doing {
-            border:3px solid #F1C40F;
-        }
-        .finished {
-            border:3px solid #27AE60;
-        }
-        .not-finish {
-            border:3px solid #C0392B;
-        }
-        h1 {
-            display:inline;
-        }
     </style>
-    <div style="margin-top:20px">
-        <h1 style="color:#0000FF">
-            <a href="/year">Year</a>:{{$year}}
-        </h1> <h1>--></h1>
-        @if($term == "3")
-            <h1 style="color:#800080">
-                <a href="/year/{{$year}}/term">Term</a>: Summer
-            </h1> <h1>--></h1>
-        @else
-            <h1 style="color:#800080">
-                <a href="/year/{{$year}}/term">Term</a>: {{$term}}
-            </h1> <h1>--></h1>
-        @endif
-        <h1 style="color:#FF7373"><a href="/term/{{$term}}/subject">Subject</a>: {{$subjectName}}</h1>
-    </div>
-    <div align="center" style="margin-top:50px;margin-bottom:30px">
-        <div class="card">
-            <h1>Homeworks</h1>
+    <div class="card">
+        <div class="card-header">
+            <h3>Homework List</h3>
         </div>
-        <br>
-        <button class="btn btn-success" data-toggle="modal" data-target="#addHomeworkModal">+ Add Homework</button>
-        @if(count($homeworks) == 0)
-            <div class="alert alert-danger">
-                <h1>No Homework.</h1>
-            </div>
-        @endif
+        <div class="card-body">
+            <button class="btn btn-success" data-toggle="modal" data-target="#addHomeworkModal" style="margin-bottom:20px">+ Create New Homework</button>
             @foreach($homeworks as $homework)
-                <div class="card text-center {{$homework->status == 'doing' ? 'doing' : ($homework->status == 'finished' ? 'finished' : ($homework->status == 'notfinish' ? 'not-finish' : ''))}}">
+                <div class="card text-center card text-center {{$homework->status == 'doing' ? 'border border-warning' : ($homework->status == 'finished' ? 'border border-success' : ($homework->status == 'notfinish' ? 'border border-danger' : ''))}}">
                     <div class="card-body">
-                        <h2 class="card-title">{{$homework->name}}</h2>
-                        <div class="group-form">
-                            <form action="/homework/{{$homework->id}}/links" method="get">
-                                <button type="submit" class="btn btn-info">Links</button>
-                            </form>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#editHomeworkModal" data-id="{{$homework->id}}" data-name="{{$homework->name}}" data-order-date="{{$homework->order_date}}" data-sent-date="{{$homework->sent_date}}" data-status="{{$homework->status}}">Edit</button>
-                            <form action="/delete-homework/{{$homework->id}}" method="post">
-                                {{csrf_field()}}
-                                {{method_field('DELETE')}}
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
+                        <h4 class="card-title">{{$homework->name}}</h4>
+                        <form>
+                            <a href="/homework/{{$homework->id}}/links" class="btn btn-primary">Document Link Of Homework</a>
+                        </form>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#editHomeworkModal" data-id="{{$homework->id}}" data-name="{{$homework->name}}" data-order-date="{{$homework->order_date}}" data-sent-date="{{$homework->sent_date}}" data-status="{{$homework->status}}">Edit</button>
+                        <form action="/delete-homework/{{$homework->id}}" method="post">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                     <div class="card-footer text-muted">
                         <span>Order: {{$homework->order_date}}</span>
@@ -84,34 +45,10 @@
                         <span id="{{'printSentDate'.($loop->index + 1)}}"></span> left
                     </div>
                 </div>
+                <br>
             @endforeach
+        </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            function countdown(element, moth, day, year) {
-                var timeFormat = moth + " " + day + ", " + year + " 00:00:00";
-                var countDownDate = new Date(timeFormat).getTime();
-                var x = setInterval(function() {
-                    var now = new Date().getTime();
-                    var distance = countDownDate - now;
-                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    document.getElementById(element).innerHTML = days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s ";
-                    if (distance < 0) {
-                        clearInterval(x);
-                        document.getElementById(element).innerHTML = "TIME OUT";
-                    }
-                }, 1000);
-            }
-           $('.sent').map(function() {
-                var splited = $(this).text().split("-");
-                countdown("printSentDate" + $(this).attr('id'), parseInt(splited[1]), parseInt(splited[2]), parseInt(splited[0]));
-            });
-        });
-    </script>
 @endsection
 @section('footer')
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="addHomeworkModal">
@@ -228,6 +165,34 @@
                 $('#edit-sentDate').val($(this).data('sent-date'));
                 var status = convertStatus($(this).data('status'));
                 $('#edit-status').val(status);
+            });
+            function countdown(element, moth, day, year) {
+                var timeFormat = moth + " " + day + ", " + year + " 00:00:00";
+                var countDownDate = new Date(timeFormat).getTime();
+                var x = setInterval(function() {
+                    var now = new Date().getTime();
+                    var distance = countDownDate - now;
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    document.getElementById(element).innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+                    if (distance < 0) {
+                        clearInterval(x);
+                        document.getElementById(element).innerHTML = "TIME OUT";
+                    }
+                }, 1000);
+            }
+            $('.sent').map(function() {
+                var splited = $(this).text().split("-");
+                countdown("printSentDate" + $(this).attr('id'), parseInt(splited[1]), parseInt(splited[2]), parseInt(splited[0]));
+            });
+            $('button.btn-danger').on('click', function() {
+               var result = confirm('Are you sure?');
+               if(!result) {
+                   return false;
+               }
             });
         });
     </script>

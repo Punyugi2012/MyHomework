@@ -22,31 +22,31 @@
         <div class="card-header">
             <h3>Term List</h3>
         </div>
-    <div class="card-body">
-       <table class="table text-center">
-            <thead class="thead-dark">
-                <tr>
-                   <th><h3>Term</h3></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <a href="/term/1/subject" class="btn btn-info">1</a>
-                    </td>
-                </tr>
-                <tr>
-                     <td>
-                        <a href="/term/2/subject" class="btn btn-info">2</a>
-                    </td>
-                </tr>
-                <tr>
-                     <td>
-                        <a href="/term/3/subject" class="btn btn-info">Summer</a>
-                    </td>
-                </tr>
-            </tbody>
-       </table>
-    </div>
+        <div class="card-body">
+            <table class="table text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th><h3>Term</h3></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="/term/1/subject" class="btn btn-info">1</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="/term/2/subject" class="btn btn-info">2</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="/term/3/subject" class="btn btn-info">Summer</a>
+                            </td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
     </div>
 @endsection
