@@ -14,7 +14,7 @@
 @endsection
 @section('content')
     <style>
-        form {
+        .card form {
             display:inline;
         }
     </style>
@@ -23,30 +23,44 @@
             <h3>Homework List</h3>
         </div>
         <div class="card-body">
-            <button class="btn btn-success" data-toggle="modal" data-target="#addHomeworkModal" style="margin-bottom:20px">+ Create New Homework</button>
-            @foreach($homeworks as $homework)
-                <div class="card text-center card text-center {{$homework->status == 'doing' ? 'border border-warning' : ($homework->status == 'finished' ? 'border border-success' : ($homework->status == 'notfinish' ? 'border border-danger' : ''))}}">
-                    <div class="card-body">
-                        <h4 class="card-title">{{$homework->name}}</h4>
-                        <form>
-                            <a href="/homework/{{$homework->id}}/links" class="btn btn-primary">Document Link Of Homework</a>
-                        </form>
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#editHomeworkModal" data-id="{{$homework->id}}" data-name="{{$homework->name}}" data-order-date="{{$homework->order_date}}" data-sent-date="{{$homework->sent_date}}" data-status="{{$homework->status}}">Edit</button>
-                        <form action="/delete-homework/{{$homework->id}}" method="post">
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <span>Order: {{$homework->order_date}}</span>
-                        Sent: <span class="{{$homework->status == 'finished'? '' : ($homework->status == 'notfinish' ? '' : 'sent')}}" id="{{$loop->index + 1}}">{{$homework->sent_date}}</span>
-                        <br>
-                        <span id="{{'printSentDate'.($loop->index + 1)}}"></span> left
-                    </div>
-                </div>
-                <br>
-            @endforeach
+            <button class="btn btn-success" data-toggle="modal" data-target="#addHomeworkModal" style="margin-bottom:20px">+CreateNewHomework</button>
+            <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Order</th>
+                            <th>Sent</th>
+                            <th>Time left</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(count($homeworks) == 0) 
+                            <tr>
+                                <td colspan="7" class="text-center"><h3>.....Empty.....</h3></td>
+                            </tr>
+                        @endif
+                        @foreach($homeworks as $homework)
+                        <tr class="{{$homework->status == 'doing' ? 'bg-warning' : ($homework->status == 'finished' ? 'bg-success' : ($homework->status == 'notfinish' ? 'bg-danger' : 'bg-secondary'))}}">
+                            <td class="text-light">{{$homework->name}}</td>
+                            <td class="text-light">{{$homework->order_date}}</td>
+                            <td class="sent text-light" id="{{$loop->index + 1}}">{{$homework->sent_date}}</td>
+                            <td class="text-light" id="printSentDate{{$loop->index + 1}}"></td>
+                            <td>
+                                <form>
+                                    <a href="/homework/{{$homework->id}}/links" class="btn btn-primary border border-dark">Documents</a>
+                                </form>
+                                <button class="btn btn-warning border border-dark" data-toggle="modal" data-target="#editHomeworkModal" data-id="{{$homework->id}}" data-name="{{$homework->name}}" data-order-date="{{$homework->order_date}}" data-sent-date="{{$homework->sent_date}}" data-status="{{$homework->status}}">Edit</button>
+                                <form action="/delete-homework/{{$homework->id}}" method="post">
+                                    {{csrf_field()}}
+                                    {{method_field('DELETE')}}
+                                    <button type="submit" class="btn btn-danger border border-dark">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+            </table>
         </div>
     </div>
 @endsection
@@ -167,6 +181,7 @@
                 $('#edit-status').val(status);
             });
             function countdown(element, moth, day, year) {
+                console.log(element);
                 var timeFormat = moth + " " + day + ", " + year + " 00:00:00";
                 var countDownDate = new Date(timeFormat).getTime();
                 var x = setInterval(function() {

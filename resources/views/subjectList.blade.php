@@ -36,50 +36,50 @@
         <div class="card-header">
             <h3>Subject List</h3>
         </div>
-    <div class="card-body">
-       <button class="btn btn-success" data-toggle="modal" data-target="#addSubjectModal">+CreateNewSubject</button>
-       <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>SubjectCode</th>
-                    <th>Name</th>
-                    <th>Professor</th>
-                    <th>ProfessorWeb</th>
-                    <th>status</th>
-                    <th>BeginStudy</th>
-                    <th>Tools</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if(count($subjects) == 0) 
+        <div class="card-body">
+        <button class="btn btn-success" data-toggle="modal" data-target="#addSubjectModal">+CreateNewSubject</button>
+        <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <td colspan="7" class="text-center"><h3>.....Empty.....</h3></td>
+                        <th>SubjectCode</th>
+                        <th>Name</th>
+                        <th>Professor</th>
+                        <th>ProfessorWeb</th>
+                        <th>status</th>
+                        <th>BeginStudy</th>
+                        <th>Tools</th>
                     </tr>
-                @endif
-                @foreach($subjects as $subject)
-                <tr>
-                    <td class="bg-primary">{{$subject->subject_code}}</td>
-                    <td class="bg-info">{{$subject->name}}</td>
-                    <td>{{$subject->professor_name}}</td>
-                    <td>
-                        <a href="{{$subject->professor_web}}" target="_blank">{{$subject->professor_web}}</a>
-                    </td>
-                    <td class="status {{$subject->status == 'studying' ? 'bg-warning' : ($subject->status == 'passed' ? 'bg-success' : ($subject->status == 'notpass' ? 'bg-danger' : ''))}}">{{$subject->status}}</td>
-                    <td>{{$subject->begin_date}}</td>
-                    <td>
-                        <a href="/subject/{{$subject->id}}/homework" class="btn btn-primary">Homework</a>
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
-                        <form action="\delete-subject\{{$subject->id}}" method="post">
-                            {{csrf_field()}}
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-       </table>
-    </div>
+                </thead>
+                <tbody>
+                    @if(count($subjects) == 0) 
+                        <tr>
+                            <td colspan="7" class="text-center"><h3>.....Empty.....</h3></td>
+                        </tr>
+                    @endif
+                    @foreach($subjects as $subject)
+                    <tr>
+                        <td class="bg-primary">{{$subject->subject_code}}</td>
+                        <td class="bg-info">{{$subject->name}}</td>
+                        <td>{{$subject->professor_name}}</td>
+                        <td>
+                            <a href="{{$subject->professor_web}}" target="_blank">{{$subject->professor_web}}</a>
+                        </td>
+                        <td class="status {{$subject->status == 'studying' ? 'bg-warning' : ($subject->status == 'passed' ? 'bg-success' : ($subject->status == 'notpass' ? 'bg-danger' : ''))}}">{{$subject->status}}</td>
+                        <td>{{$subject->begin_date}}</td>
+                        <td>
+                            <a href="/subject/{{$subject->id}}/homework" class="btn btn-primary">Homework</a>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
+                            <form action="\delete-subject\{{$subject->id}}" method="post">
+                                {{csrf_field()}}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+        </table>
+        </div>
     </div>
 @endsection
 @section('footer')
