@@ -67,7 +67,7 @@
                         <td class="status {{$subject->status == 'studying' ? 'bg-warning' : ($subject->status == 'passed' ? 'bg-success' : ($subject->status == 'notpass' ? 'bg-danger' : ''))}}">{{$subject->status}}</td>
                         <td>{{$subject->begin_date}}</td>
                         <td>
-                            <a href="/subject/{{$subject->id}}/homework" class="btn btn-primary">Homework</a>
+                            <a href="/subject/{{$subject->id}}/homework" class="btn btn-primary"><span class="badge badge-{{$subject->numOfHomework > 0 ?'danger' : 'light'}}">{{$subject->numOfHomework}}</span> Homework</a>
                             <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
                             <form action="\delete-subject\{{$subject->id}}" method="post">
                                 {{csrf_field()}}

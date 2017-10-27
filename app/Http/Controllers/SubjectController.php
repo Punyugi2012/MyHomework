@@ -20,7 +20,14 @@ class SubjectController extends Controller
             ->where('term_id', $term)
             ->first()
             ->subjects??[];
+        $this->addNumOfHomeworkEachSubject($subjects);
         return view('subjectList', compact('subjects', 'year', 'term'));
+    }
+    private function addNumOfHomeworkEachSubject($subjects)
+    {
+        foreach ($subjects as $subject) {
+            $subject->numOfHomework = $subject->getNumOfHomework();
+        }
     }
     private function convertStatus($status)
     {

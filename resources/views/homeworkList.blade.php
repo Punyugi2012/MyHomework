@@ -42,10 +42,10 @@
                         @endif
                         @foreach($homeworks as $homework)
                         <tr class="{{$homework->status == 'doing' ? 'bg-warning' : ($homework->status == 'finished' ? 'bg-success' : ($homework->status == 'notfinish' ? 'bg-danger' : 'bg-secondary'))}}">
-                            <td class="text-light">{{$homework->name}}</td>
-                            <td class="text-light">{{$homework->order_date}}</td>
-                            <td class="sent text-light" id="{{$loop->index + 1}}">{{$homework->sent_date}}</td>
-                            <td class="text-light" id="printSentDate{{$loop->index + 1}}"></td>
+                            <td class="{{$homework->status == 'doing' ? 'text-dark' : 'text-light'}}">{{$homework->name}}</td>
+                            <td class="{{$homework->status == 'doing' ? 'text-dark' : 'text-light'}}">{{$homework->order_date}}</td>
+                            <td class="sent {{$homework->status == 'doing' ? 'text-dark' : 'text-light'}}" id="{{$loop->index + 1}}">{{$homework->sent_date}}</td>
+                            <td class="{{$homework->status == 'doing' ? 'text-dark' : 'text-light'}}" id="printSentDate{{$loop->index + 1}}"></td>
                             <td>
                                 <form>
                                     <a href="/homework/{{$homework->id}}/links" class="btn btn-primary border border-dark">Documents</a>

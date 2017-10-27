@@ -11,4 +11,18 @@ class Subject extends Model
     public function homeworks() {
         return $this->hasMany('App\Homework');
     }
+    public function getNumOfHomework() {
+        $homeworks =  $this->homeworks;
+        $count = 0;
+        foreach($homeworks as $homework) {
+            if(
+            $homework->status == 'none' || 
+            $homework->status == 'doing' ||
+            $homework->status == 'notfinish'
+            ) {
+                $count++;
+            }
+        }
+        return $count;
+    }
 }
