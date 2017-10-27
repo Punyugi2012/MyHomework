@@ -12,7 +12,8 @@ use App\YearTermSubject;
 
 class SubjectController extends Controller
 {
-    public function onSubjectsList($term) {
+    public function onSubjectsList($term)
+    {
         session()->put('term', $term);
         $year = session()->get('year');
         $subjects = YearTerm::where('year_id', $year)
@@ -21,16 +22,17 @@ class SubjectController extends Controller
             ->subjects??[];
         return view('subjectList', compact('subjects', 'year', 'term'));
     }
-    private function convertStatus($status) {
-        if($status == 1) {
+    private function convertStatus($status)
+    {
+        if ($status == 1) {
             return 'studying';
-        }
-        elseif($status == 2) {
+        } elseif ($status == 2) {
             return  'passed';
         }
         return 'notpass';
     }
-    public function addSubject(Request $request) {
+    public function addSubject(Request $request)
+    {
         $status = $request['subjectStatus'];
         $status = $this->convertStatus($status);
         Subject::create([
@@ -49,12 +51,14 @@ class SubjectController extends Controller
         ]);
         return back();
     }
-    public function deleteSubject($id) {
+    public function deleteSubject($id)
+    {
         $subject = Subject::find($id);
         $subject->delete();
         return back();
     }
-    public function editSubject(Request $request, $id) {
+    public function editSubject(Request $request, $id)
+    {
         $status = $request['edit-subjectStatus'];
         $status = $this->convertStatus($status);
         Subject::find($id)->update([

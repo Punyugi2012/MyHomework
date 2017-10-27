@@ -1,83 +1,85 @@
 @extends('templates.template')
-@section('title', 'subjects list')
+@section('title', 'subject list')
 @section('header')
-    @include('components.header', ['logo'=>'SUBJECTS LIST'])
+    @include('components.header')
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/year">Year</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/year/{{session()->get('year')}}/term">Term</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Subject</li>
+        </ol>
+    </nav>
 @endsection
 @section('content')
     <style>
-      .studying {
-          border:3px solid #F1C40F;
-      }
-      .passed {
-          border:3px solid #27AE60;
-      }
-      .notpass {
-          border:3px solid #C0392B;
-      }
-      div.card {
-          width:200px;
-          margin-bottom:20px;
-          margin-top:10px;
-      }
-      div.alert {
-          margin-top:80px;
-      }
-      div.group-form {
-          display:inline;
-          float:right;
-      }
-      form, .add-subject {
-          display:inline;
-      }
-      h1 {
-          display:inline;
-      }
+        .card-body button:first-child {
+            margin-bottom:20px;
+        }
+        tr td.bg-primary {
+            color:#fff;
+        }
+        tr td.bg-info {
+            color:#fff;
+        }
+        tr td.status {
+            color:#fff;
+        }
+        tr td a {
+            font-size:16px!important;
+        }
+        tr td form  {
+            display:inline;
+        }
     </style>
-    <div style="margin-top:20px;">
-        <h1 style="color:#0000FF">
-            <a href="/year">Year</a>:{{$year}}
-        </h1> <h1>--></h1>
-        @if($term == "3")
-            <h1 style="color:#800080">
-                <a href="/year/{{$year}}/term">Term</a>: Summer
-            </h1> <h1>--></h1>
-        @else
-            <h1 style="color:#800080">
-                <a href="/year/{{$year}}/term">Term</a>: {{$term}}
-            </h1> 
-        @endif
-    </div>
-    <div align="center" style="margin-top:50px;margin-bottom:30px">
-        <div class="card">
-            <h1>Subjects</h1>
+    <div class="card">
+        <div class="card-header">
+            <h3>Subject List</h3>
         </div>
-        <button class="btn btn-success add-subject" data-toggle="modal" data-target="#addSubjectModal">+ Add Subject</button>
-        @if(count($subjects) == 0)
-            <div class="alert alert-danger">
-                <h1>No Subjects.</h1>
-            </div>
-        @endif
-        @foreach($subjects as $subject)
-            <div class="card text-center {{$subject->status == 'studying' ? 'studying' : ($subject->status == 'passed' ? 'passed' : ($subject->status == 'notpass' ? 'notpass' : ''))}}" style="width:50%;margin-top:20px">
-                <div class="card-body">
-                    <h2 class="card-title">{{$subject->name}}</h2>
-                    <p class="card-text">{{$subject->professor_name}}</p>
-                    <a href="/subject/{{$subject->id}}/homework" class="btn btn-primary">Go Homeworks</a>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#subjectDetail" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Detail</button>                    
-                    <div class="group-form">
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
-                        <form action="\delete-subject\{{$subject->id}}" method="post">
-                            {{csrf_field()}}
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="card-footer text-muted">
-                    {{$subject->subject_date}}
-                </div>
-            </div>
-        @endforeach
+        <div class="card-body">
+        <button class="btn btn-success" data-toggle="modal" data-target="#addSubjectModal">+CreateNewSubject</button>
+        <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>SubjectCode</th>
+                        <th>Name</th>
+                        <th>Professor</th>
+                        <th>ProfessorWeb</th>
+                        <th>status</th>
+                        <th>BeginStudy</th>
+                        <th>Tools</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(count($subjects) == 0) 
+                        <tr>
+                            <td colspan="7" class="text-center"><h3>.....Empty.....</h3></td>
+                        </tr>
+                    @endif
+                    @foreach($subjects as $subject)
+                    <tr>
+                        <td class="bg-primary">{{$subject->subject_code}}</td>
+                        <td class="bg-info">{{$subject->name}}</td>
+                        <td>{{$subject->professor_name}}</td>
+                        <td>
+                            <a href="{{$subject->professor_web}}" target="_blank">{{$subject->professor_web}}</a>
+                        </td>
+                        <td class="status {{$subject->status == 'studying' ? 'bg-warning' : ($subject->status == 'passed' ? 'bg-success' : ($subject->status == 'notpass' ? 'bg-danger' : ''))}}">{{$subject->status}}</td>
+                        <td>{{$subject->begin_date}}</td>
+                        <td>
+                            <a href="/subject/{{$subject->id}}/homework" class="btn btn-primary">Homework</a>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#editSubjectModal" data-id="{{$subject->id}}" data-subject-code="{{$subject->subject_code}}" data-subject-name="{{$subject->name}}" data-status="{{$subject->status}}" data-begin-date="{{$subject->begin_date}}" data-professor-name="{{$subject->professor_name}}" data-professor-web="{{$subject->professor_web}}">Edit</button>
+                            <form action="\delete-subject\{{$subject->id}}" method="post">
+                                {{csrf_field()}}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+        </table>
+        </div>
     </div>
 @endsection
 @section('footer')

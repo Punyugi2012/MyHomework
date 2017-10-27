@@ -12,7 +12,8 @@ use App\YearTerm;
 
 class MyHomeworkController extends Controller
 {
-    public function onHome() {
+    public function onHome()
+    {
         $collection = array(
             1 => array(
                 1 => array(),
@@ -35,17 +36,19 @@ class MyHomeworkController extends Controller
                 3 => array()
             )
         );
-        for($year = 1; $year <= 4; $year++) {
-            for($term = 1; $term <= 3; $term++) {
-                array_push($collection[$year][$term],YearTerm::where('year_id', $year)->where('term_id', $term)->first()->subjects);
+        for ($year = 1; $year <= 4; $year++) {
+            for ($term = 1; $term <= 3; $term++) {
+                array_push($collection[$year][$term], YearTerm::where('year_id', $year)->where('term_id', $term)->first()->subjects);
             }
         }
         return view('home', compact('collection'));
     }
-    public function onYearslist() {
+    public function onYearslist()
+    {
         return view('yearsList');
     }
-    public function onTermsList($year) {
+    public function onTermsList($year)
+    {
         session()->put('year', $year);
         return view('termsList', ['year'=>$year]);
     }
